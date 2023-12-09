@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
+<!-- Your existing HTML content -->
 <h3 class="light-blue-text text-darken-4 center-align">Categories</h3>
 
 <div class="row">
@@ -20,11 +21,52 @@
         </div>
         <div class="card-action">
           <a href="{{ url_for('edit_category', category_id=category.id) }}" class="btn green accent-4">Edit</a>
-          <a href="{{ url_for('delete_category', category_id=category.id) }}" class="btn red">Delete</a>
+          <!-- Modified modal trigger to use JavaScript function with specific ID -->
+          <a class="btn red modal-trigger" onclick="openModal('{{ category.id }}')">Delete</a>
+        </div>
+      </div>
+    
+      <!-- Modal Structure specific to each category -->
+      <div id="modal-{{ category.id }}" class="modal">
+        <div class="modal-content">
+          <h4>Modal Header</h4>
+          <p>A bunch of text for {{ category.category_name }}</p>
+        </div>
+        <div class="modal-footer">
+          <!-- Modify the delete button to use JavaScript function with specific ID -->
+          <a href="#" onclick="deleteCategory('{{ category.id }}')" class="modal-close waves-effect waves-green btn-flat">Delete</a>
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
       </div>
     </div>
     {% endfor %}
-  </div>
+</div>
+
+<!-- JavaScript to handle modal opening and deletion -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, {});
+    });
+
+    // Function to open the modal for the specific category
+    function openModal(categoryId) {
+        var modalId = "#modal-" + categoryId;
+        $(modalId).modal('open');
+    }
+
+    // Function to handle deletion of the specific category
+    function deleteCategory(categoryId) {
+        // Perform deletion logic using AJAX or other methods
+        // For example, you can send an AJAX request to the server to delete the category
+
+        // After successful deletion, you can update the UI or perform other actions
+        // For demonstration purposes, here's just closing the modal
+        var modalId = "#modal-" + categoryId;
+        $(modalId).modal('close');
+    }
+</script>
 
 {% endblock %}
