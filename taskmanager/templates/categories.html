@@ -45,28 +45,6 @@
 <!-- JavaScript to handle modal opening and deletion -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems, {});
-    });
 
-    // Function to open the modal for the specific category
-    function openModal(categoryId) {
-        var modalId = "#modal-" + categoryId;
-        $(modalId).modal('open');
-    }
-
-    // Function to handle deletion of the specific category
-    function deleteCategory(categoryId) {
-        // Perform deletion logic using AJAX or other methods
-        // For example, you can send an AJAX request to the server to delete the category
-
-        // After successful deletion, you can update the UI or perform other actions
-        // For demonstration purposes, here's just closing the modal
-        var modalId = "#modal-" + categoryId;
-        $(modalId).modal('close');
-    }
-</script>
 
 {% endblock %}
